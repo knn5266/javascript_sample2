@@ -4,6 +4,7 @@ const backToMenu = document.querySelector('.sp-back-to-menu');
 const originalImage = document.querySelector('#sp-original-image');
 const showOriginalBtn = document.querySelector('#sp-show-original-btn');
 const screen = document.querySelector('.sp-screen');
+const counter = document.querySelector('.sp-counter');
 
 let level;
 let size;
@@ -11,6 +12,7 @@ let orderedArray = [];
 let hiddenTileIndex;
 let tilesArray = [];
 let tiles;
+let count = 0;
 const images = ['space', 'veges'];
 let selectedImage;
 const levelMap = {
@@ -39,6 +41,7 @@ menu.forEach((item) => {
 
 backToMenu.addEventListener('click', () => {
   menuCover.classList.remove('hide');
+  screen.classList.remove('zoom');
 });
 
 function setOriginalImage() {
@@ -81,6 +84,8 @@ function renderTiles(arr) {
 
 function start() {
   setOriginalImage();
+  count = 0;
+  counter.textContent = count;
   tilesArray = generateShuffledArray(orderedArray);
   renderTiles(tilesArray);
   updateScreen();
@@ -99,6 +104,8 @@ function generateShuffledArray(arr) {
 
 function updateScreen() {
   tiles = document.querySelectorAll('.sp-tile');
+  const hiddenTileRow = Math.floor(hiddenTileIndex / size);
+  const hiddenTileCol = hiddenTileIndex % size;
 
   function generateNewArray(arr, index, hiddenTileIndex) {
     const tempValue = arr[index];
@@ -111,11 +118,38 @@ function updateScreen() {
     tilesArray = generateNewArray(tilesArray, index, hiddenTileIndex);
     hiddenTileIndex = index;
     renderTiles(tilesArray);
+    count++;
+    counter.textContent = count;
+    setTimeout(() => {
+      if (JSON.stringify(tilesArray) === JSON.stringify(orderedArray)) {
+        complete();
+      }
+    });
   }
 
   tiles.forEach((tile, index) => {
     tile.addEventListener('click', () => {
-      updateTiles(index);
+      const row = Math.floor(index / size);
+      const col = index % size;
+      if (level === 'easy') {
+        updateTiles(index);
+      } else {
+        if (
+          (row === hiddenTileRow && Math.abs(col - hiddenTileCol) === 1) ||
+          (col === hiddenTileCol && Math.abs(row - hiddenTileRow) === 1)
+        ) {
+          updateTiles(index);
+        }
+      }
+      updateScreen();
     });
+  });
+}
+
+function complete() {
+  tiles[hiddenTileIndex].classList.remove('hidden');
+  screen.classList.add('zoom');
+  tiles.forEach((tile) => {
+    tile.classList.add('complete');
   });
 }
