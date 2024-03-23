@@ -28,7 +28,7 @@ menu.forEach((item) => {
         orderedArray.push(tileXY);
       }
     }
-    screen.style.gridTemplateColums = levelMap[level].grid;
+    screen.style.gridTemplateColumns = levelMap[level].grid;
     start();
   });
 });
@@ -54,7 +54,7 @@ showOriginalBtn.addEventListener('mouseleave', () => {
 });
 
 function renderTiles(arr) {
-  screen.innerHtml = ' ';
+  screen.innerHTML = '';
   arr.forEach((tile) => {
     const div = document.createElement('div');
     div.classList.add('sp-tile');
