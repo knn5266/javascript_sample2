@@ -21,6 +21,11 @@ module.exports = {
         test: /\.html$/,
         loader: 'html-loader',
       },
+      {
+        test: /\.(svg|png|jpg|jpeg|ico|gif)$/,
+        type: 'asset/resource',
+        loader: 'image-webpack-loader',
+      },
     ],
   },
   plugins: [
