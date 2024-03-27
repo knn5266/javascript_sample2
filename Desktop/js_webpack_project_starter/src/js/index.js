@@ -1,3 +1,5 @@
+import '../css/style.css';
+
 import * as Todo from './modules/todo.js';
 import * as Typing from './modules/typing.js';
 import * as Slide from './modules/slide.js';
