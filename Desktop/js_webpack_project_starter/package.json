@@ -2,9 +2,9 @@
   "name": "js_webpack_project_starter",
   "version": "1.0.0",
   "scripts": {
-    "dev":"webpack --config webpack.dev.js",
-    "build":"webpack --config webpack.prod.js",
-    "serve":"webpack-dev-server --config webpack.dev.js"
+    "dev": "webpack --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
+    "serve": "webpack-dev-server --config webpack.dev.js"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +12,7 @@
   "main": "index.js",
   "description": "",
   "devDependencies": {
+    "html-webpack-plugin": "^5.6.0",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.4",
