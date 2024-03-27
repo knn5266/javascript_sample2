@@ -4,7 +4,7 @@ const { merge } = require('webpack-merge');
 
 module.exports = merge(commonConfig, {
   mode: 'development',
-  devserver: {
+  devServer: {
     open: true,
     port: 5001,
     static: {
