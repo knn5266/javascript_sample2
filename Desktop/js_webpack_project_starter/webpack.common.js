@@ -25,6 +25,22 @@ module.exports = {
         type: 'asset/resource',
         loader: 'image-webpack-loader',
       },
+      {
+        test: /\.js$/,
+        exclude: /node-modules/,
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            [
+              '@babel/preset-env',
+              {
+                useBuiltIns: 'usage',
+                corejs: 3,
+              },
+            ],
+          ],
+        },
+      },
     ],
   },
   plugins: [
